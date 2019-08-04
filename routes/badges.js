@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const badgesMocks = require("../../utils/mocks/badges");
+const badgesMocks = require("../utils/mocks/badges");
 
 router.get("/", function(req, res) {
   res.status(200).json({
