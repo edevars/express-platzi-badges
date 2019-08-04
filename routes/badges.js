@@ -1,48 +1,62 @@
 const express = require("express");
-const router = express.Router();
 const badgesMocks = require("../utils/mocks/badges");
+const BadgeService = require("../services/badges");
 
-router.get("/", function(req, res) {
+const router = express.Router();
+
+//Instanciando la clase del sevicio
+const badgeService = new BadgeService();
+
+router.get("/", async function(req, res) {
+  const badges = await badgeService.getBadges();
+
   res.status(200).json({
-    data: badgesMocks,
+    data: badges,
     message: "badges listed"
   });
 });
 
-router.get("/:badgeId", function(req, res) {
+router.get("/:badgeId", async function(req, res) {
   const { badgeId } = req.params;
 
+  const badge = await badgeService.getBadge({ badgeId });
+
   res.status(200).json({
-    data: badgesMocks[0],
+    data: badge,
     message: "badge retrieve"
   });
 });
 
-router.post("/", function(req, res) {
-  const { badgeId } = req.params;
+router.post("/", async function(req, res) {
+  const { body: badge } = req;
+
+  const badge = await badgeService.createBadge({ badge });
 
   res.status(201).json({
-    data: badgesMocks[0],
+    data: badge,
     message: "badge created"
   });
 });
 
-router.put("/:badgeId", function(req, res) {
+router.put("/:badgeId", async function(req, res) {
   const { badgeId } = req.params;
+  const { body: badge } = req;
+  const badgeUpdated = await badgeService.updateBadge({ badgeId, badge });
 
   res.status(201).json({
-    data: badgesMocks[0],
+    data: badgeUpdated,
     message: "badge updated"
   });
 });
 
-router.put("/:badgeId", function(req, res) {
-    const { badgeId } = req.params;
-  
-    res.status(201).json({
-      data: badgesMocks[0],
-      message: "badge deleted"
-    });
+router.put("/:badgeId", async function(req, res) {
+  const { badgeId } = req.params;
+  const badge = await badgeService.deleteBadge({ badgeId });
+
+  res.status(201).json({
+    data: badge,
+    message: "badge deleted"
   });
+});
 
 module.exports = router;
