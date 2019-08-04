@@ -1,0 +1,16 @@
+{
+  "name": "express-badges",
+  "version": "1.0.0",
+  "description": "An API for platzi-badges",
+  "main": "index.js",
+  "author": "edevars",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  }
+}
