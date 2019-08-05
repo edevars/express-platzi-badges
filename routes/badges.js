@@ -18,7 +18,7 @@ router.get("/", async function(req, res, next) {
     next(error);
   }
 });
-req;
+
 router.get("/:badgeId", async function(req, res) {
   const { badgeId } = req.params;
 
