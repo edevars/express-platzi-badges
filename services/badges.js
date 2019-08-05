@@ -1,26 +1,45 @@
 const badgesMocks = require("../utils/mocks/badges");
+const MongoLib = require("../lib/mongo");
 
 class BadgeService {
-  constructor() {}
-
-  getBadges() {
-    return Promise.resolve(badgesMocks);
+  constructor() {
+    this.collection = "badges";
+    this.mongoDB = new MongoLib();
   }
 
-  getBadge({ badgeId }) {
-    return Promise.resolve(badgesMocks[0]);
+  async getBadges() {
+    const { collection, mongoDB } = this;
+    const badges = await mongoDB.getAll(collection);
+
+    return badges || [];
   }
 
-  createBadge({ badge }) {
-    return Promise.resolve(badgesMocks[0]);
+  async getBadge({ badgeId }) {
+    const { collection, mongoDB } = this;
+    const badge = await mongoDB.getOne(collection, badgeId);
+
+    return badge || {};
   }
 
-  updateBadge({ badgeId, badge }) {
-    return Promise.resolve(badgesMocks[0]);
+  async createBadge({ badge }) {
+    const { collection, mongoDB } = this;
+    const badgeCreated = await mongoDB.create(collection, badge);
+
+    return badgeCreated || {};
   }
 
-  deleteBadge({ badgeId }) {
-    return Promise.resolve(badgesMocks[0]);
+  async updateBadge({ badgeId, badge }) {
+    const { collection, mongoDB } = this;
+    const badgeUpserted = await mongoDB.updateOne(collection, badgeId, badge);
+
+    return badgeUpserted || {};
+  }
+
+  async deleteBadge({ badgeId }) {
+    const { collection, mongoDB } = this;
+    const badgeDeleted = await mongoDB.delete(collection, badgeId);
+
+    return badgeDeleted || {};
   }
 }
 

@@ -19,7 +19,7 @@ router.get("/", async function(req, res, next) {
   }
 });
 
-router.get("/:badgeId", async function(req, res) {
+router.get("/:badgeId", async function(req, res, next) {
   const { badgeId } = req.params;
 
   try {
@@ -34,7 +34,7 @@ router.get("/:badgeId", async function(req, res) {
   }
 });
 
-router.post("/", async function(req, res) {
+router.post("/", async function(req, res, next) {
   const { body: badge } = req;
 
   try {
@@ -49,7 +49,7 @@ router.post("/", async function(req, res) {
   }
 });
 
-router.put("/:badgeId", async function(req, res) {
+router.put("/:badgeId", async function(req, res, next) {
   const { badgeId } = req.params;
   const { body: badge } = req;
 
@@ -65,7 +65,7 @@ router.put("/:badgeId", async function(req, res) {
   }
 });
 
-router.delete("/:badgeId", async function(req, res) {
+router.delete("/:badgeId", async function(req, res, next) {
   const { badgeId } = req.params;
   try {
     const badgeDeleted = await badgeService.deleteBadge({ badgeId });
