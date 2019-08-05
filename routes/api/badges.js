@@ -1,5 +1,5 @@
 const express = require("express");
-const BadgeService = require("../services/badges");
+const BadgeService = require("../../services/badges");
 
 const router = express.Router();
 
