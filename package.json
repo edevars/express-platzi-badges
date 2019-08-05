@@ -6,7 +6,7 @@
   "author": "edevars",
   "license": "MIT",
   "scripts": {
-    "start": "node index",
+    "start": "NODE_ENV=production node index",
     "dev": "nodemon index"
   },
   "dependencies": {
