@@ -38,10 +38,10 @@ router.post("/", async function(req, res) {
   const { body: badge } = req;
 
   try {
-    const badge = await badgeService.createBadge({ badge });
+    const badgeCreated = await badgeService.createBadge({ badge });
 
     res.status(201).json({
-      data: badge,
+      data: badgeCreated,
       message: "badge created"
     });
   } catch (error) {
@@ -65,13 +65,13 @@ router.put("/:badgeId", async function(req, res) {
   }
 });
 
-router.put("/:badgeId", async function(req, res) {
+router.delete("/:badgeId", async function(req, res) {
   const { badgeId } = req.params;
   try {
-    const badge = await badgeService.deleteBadge({ badgeId });
+    const badgeDeleted = await badgeService.deleteBadge({ badgeId });
 
     res.status(201).json({
-      data: badge,
+      data: badgeDeleted,
       message: "badge deleted"
     });
   } catch (error) {
